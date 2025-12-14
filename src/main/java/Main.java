@@ -92,4 +92,44 @@ class Main
 
         return sortedHead;
     }
+
+    public static int sumDistance(Node <Integer> head, int a)
+	{
+	    int c1 = 0;
+	    int c2 = 0;
+	    int ca = 0;
+	    while(head != null)
+	    {
+	        if(head.getValue() != a)
+	        {
+	            if(ca == 0)
+	            {
+	                c1++;
+	            }
+	            
+	            if(ca != 0)
+	            {
+	                c2++;
+	            }
+	        }
+	        if(head.getValue() == a)
+	        {
+	            if(ca == 0)
+	            {
+	                ca++;
+	            }
+	            
+	            if(ca != 0)
+	            {
+	                c2 = 0;
+	            }
+	        }
+	        head = head.getNext();
+	    }
+	    if(ca==0)
+	    {
+	        return 0;
+	    }
+	    return c1 + c2; 
+	}
 }
