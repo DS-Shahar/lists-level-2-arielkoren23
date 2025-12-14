@@ -132,4 +132,29 @@ class Main
 	    }
 	    return c1 + c2; 
 	}
+
+	public static boolean areDiffrent(Node <Integer> head)
+	{
+	    boolean ok = true; 
+	    Node <Integer> num = head;
+	    while(num != null)
+	    {
+	        Node <Integer> l = head;
+	        int c = 0;
+	        while(l != null)
+	        {
+	            if(l.getValue() == num.getValue())
+	            {
+	                c++;
+	            }
+	            l = l.getNext();
+	        }
+	        if(c != 1)
+	        {
+	            return false;
+	        }
+	        num = num.getNext();
+	    }
+	    return true;
+	}
 }
