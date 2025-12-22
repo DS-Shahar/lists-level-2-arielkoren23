@@ -157,4 +157,51 @@ class Main
 	    }
 	    return true;
 	}
+	
+	public static Node<Integer> copyList(Node<Integer> l1)
+    {
+        if (l1 == null)
+            return null;
+
+        Node<Integer> head = new Node<>(l1.getValue());
+        Node<Integer> tail = head;
+        l1 = l1.getNext();
+    
+        while (l1 != null)
+        {
+           Node<Integer> newNode = new Node<>(l1.getValue());
+           tail.setNext(newNode);
+           tail = newNode;
+           l1 = l1.getNext();
+        }
+
+        return head;
+    }
+	
+	public static Node<Integer> onlyOnce(Node<Integer> list)
+	{
+    if (list == null)
+        return null;
+
+    Node<Integer> t = copyList(list);
+
+    Node<Integer> newList = new Node<>(t.getValue());
+    Node<Integer> tail = newList;
+
+    t = t.getNext();
+
+    while (t != null)
+    {
+        if (!isIn(newList, t.getValue()))
+        {
+            Node<Integer> newNode = new Node<>(t.getValue());
+            tail.setNext(newNode);
+            tail = newNode;
+        }
+        t = t.getNext();
+    }
+
+    return newList;
+}
+
 }
