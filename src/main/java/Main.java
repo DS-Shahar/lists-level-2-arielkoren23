@@ -204,4 +204,85 @@ class Main
     return newList;
 }
 
+	public static Node<Integer> maxInTriplets(Node<Integer> head) {
+    if (head == null)
+        return null;
+
+    Node<Integer> resultHead = null;
+    Node<Integer> resultTail = null;
+
+    Node<Integer> p = head;
+    int index = 0;  
+
+    while (p != null && p.getNext() != null && p.getNext().getNext() != null) 
+	{
+
+        Node<Integer> first = p;
+        Node<Integer> second = p.getNext();
+        Node<Integer> third = second.getNext();
+
+        int maxValue = first.getValue();
+        int maxIndex = index;
+
+        if (second.getValue() > maxValue) {
+            maxValue = second.getValue();
+            maxIndex = index + 1;
+        }
+
+        if (third.getValue() > maxValue) {
+            maxValue = third.getValue();
+            maxIndex = index + 2;
+        }
+
+        Node<Integer> newNode = new Node<>(maxIndex);
+
+        if (resultHead == null) {
+            resultHead = newNode;
+            resultTail = newNode;
+        } else {
+            resultTail.setNext(newNode);
+            resultTail = newNode;
+        }
+
+        p = third.getNext();
+        index += 3;
+    }
+
+    return resultHead;
+}
+
+	public static Node<Integer> deleteByPositions(Node<Integer> h, Node<Integer> pList)
+	{
+    if (h == null || pList == null)
+        return h;
+
+    Node<Integer> c = h;       
+    Node<Integer> pr = null;   
+    Node<Integer> q = pList;   
+
+    int i = 0;  // index
+
+    while (c != null && q != null) {
+
+        if (i == q.getValue()) {   
+            if (pr == null) {      
+                h = c.getNext();
+                c = h;
+            } else {
+                pr.setNext(c.getNext());
+                c = c.getNext();
+            }
+            q = q.getNext();
+        }
+        else {
+            pr = c;
+            c = c.getNext();
+        }
+
+        i++;
+    }
+
+    return h;
+	}	
+
 }
